@@ -1,0 +1,33 @@
+File Name: observation.txt (CS 152/154 Laboratory, 2021 Batch)
+Observation for: problem 2.1.1 and problem 2.1.2 (singlelift.cpp & twolifts.cpp)
+Author: Utkarsh Ranjan (200050147) 
+
+DESCRIPTION : Design object oriented abstraction for a lift.
+
+#Functioning :
+1)This lift is an exact simulation of a lift working in a building. It takes the initial input as up and down whenever it
+  is pressed at a particular floor. Then once the persons gets into the lift it takes the input from the person as to where it has to go.(This is exactly how an actual lift would recieve its input in a real world situation)
+2) Whenever a button is pressed it is printed on the terminal.The lift moves towards the call and picks the person.
+3) Meanwhile the status of the lift is printed on the terminal i.e, whether the lift is moving up or down or is paused.
+3) Whenever lift stops at a floor, its current floor, number of passengers in the lift and door(whether open or closed
+	gets printed). After taking CarCall (input given by person in the lift), the direction of the lift is determined.
+4) The lift moves towards the destination meanwhile if someone has to go in the direction of the lift, the lift stops to 	take that person, else it ignores the call. (This functionality has been implemented in the check_request function)
+5) Once the person reaches his destination, the lift moves toward the next landing call(call for lift at floors).
+6) lift has a capacity of 5(this value has been passed as an inital argument of the constructor) whenever the number of 
+   passenger exceeds this capacity the lift is paused.
+
+#Observation :
+1) Though the system was pretty complex but because of sorting controls of the program over various member function the 
+   programe became orgranized.
+2) The main function was very brief and every logic was hidden in the class lift and floor.
+3) The class lift was a complete abstraction in itself. It contained all the features of a lift so well that while make a 
+	shift from a single lift system to a double lift system, the class lift was copied without much change.
+
+#Description of singlelift.cpp
+ Read comments in the code to understand variables and functions well.
+
+#Description of twolift.cpp
+ This is almost same as the singlelift system except that there is an allocate_lift function in the class floor which allocates which lift would reach the caller on pressing the up/down button at a floor. On a particular call if lift 1 is allocated then it prints status of lift 2 first then print it for lift 1 as it moves and vice versa. This lift allocation is based on 
+ Read comment in the allocate_lift function to understand it better. 
+
+

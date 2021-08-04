@@ -1,0 +1,56 @@
+File Name: observation.txt (CS 152/154 Laboratory, 2021 Batch)
+Observation for: problem 6.1.1 (shapes2.cpp)
+Author: Utkarsh Ranjan (200050147) 
+
+#Game: Hit The Mole (Quite a popular game, in case if you don't know read Description)
+    ##Description:
+       * So there are few Holes on the gamming board (In my game there are 9 of them)
+       * From each of these holes moles pop out at random times, you simply have to hit them with a hammer (before they get back into the hole :) )to score points.
+
+#Controls:
+    Moles don't need to be controled.
+    Controls for hammer:
+    W - Move Up
+    A - Move Left
+    S - Move Down
+    D - Move Right
+    Q - exit the game
+
+Imp :: make sure you don't erase the hole while moving the hammer(I haven't redrawn hole periodically due to the issue of repeated wiping out of moles)
+
+#How to compile: 
+fltk-config --compile HitTheMole.cpp; ./HitTheMole
+
+#Implementation:
+
+* There is a class Hole which has been derived from Fl_Widget, it simple has a draw function to draw the hole at the correct location
+    FL_OFLAT_BOX : Used to make an oval shaped flat box.
+* There is a superclass MovingObject again derived from Fl_Widget, it is an abstract class.
+    Pure virtual functions : moveUp() , moveDown() , moveLeft() , moveRight(), draw() (In Fl_Widget not yet defined in MovingObject)
+* In handle function I used Fl_KEYDOWN instead of Fl_PUSH to incoorporate keyboard control. 
+    Fl_KEYDOWN : A key was pressed (FL_KEYDOWN) or released (FL_KEYUP). Fl_KEYBOARD is a synonym for FL_KEYDOWN. The key can be found in Fl::event_key().
+* The Hammer class is quite obvious and can be understood with the help of indentations
+* The Mole Class is similar to the Hammer class with few additional functions timeractions and  periodic.
+  * timeractions : this is the function that provides periodicity to the program
+  * periodic : this function create circles (which are our moles xD ) at the location of the hole periodically at fixed timeinterval refreshtime defined at the starting of the program as a static const double.
+                moreover this function also creates white circle at the location of the hole (which acts like wiping the hole)
+* There is an initgame function to initialize the hammer and holes.
+* In main there is an add_timeout which is also resposible for the periodicity of the code.
+    Fl::add_timeout : Adds a one-shot timeout callback.
+    If you need more accurate, repeated timeouts, use Fl::repeat_timeout() to reschedule the subsequent timeouts.
+    The following code will print "TICK" each second on stdout with a fair degree of accuracy:
+
+        #include <stdio.h>
+        #include <FL/Fl.H>
+        #include <FL/Fl_Window.H>
+        
+        void callback(void*) {
+            printf("TICK\n");
+            Fl::repeat_timeout(1.0, callback); // retrigger timeout
+        }
+        int main() {
+            Fl_Window win(100,100);
+            win.show();
+            Fl::add_timeout(1.0, callback); // set up first timeout
+            return Fl::run();
+        }

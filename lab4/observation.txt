@@ -1,0 +1,27 @@
+File Name: observation.txt (CS 152/154 Laboratory, 2021 Batch)
+Observation for: problem 4.1.1 (15puzzle.cpp)
+Author: Utkarsh Ranjan (200050147)
+
+# Description: Use Fltk package to make 15puzzle game.
+
+# Thinking:(This  include only the part of the lab which was not discussed by sir in class)
+
+* So we knew how to use fltk to create a button and change its label on the click of a mouse
+* I have added three data members to the class MyButton, one is the number(an int) which stores the number stored in that button; other variables i,j stores the identity of the variable;
+* In the constructor of this class I have initialised these variables
+* Furthermore I have made a member functions which takes in argument an integer and sets the number of that button as that integer.
+* Moreover to make the main look brief I have made a function intigame which initializes all the buttons of the game
+* Buttons and i,j of blank button are global variables ( initialised in initgame)
+* Whenever a button is clicked (handle function is called) the number associated with that button and the label is exchanged with the blank button
+* Further this handel function (which causes this exchange) is executed only when the clicked buttons are adjacent to the blank button and this is ensured using a bool funtcion adjacent_buttons
+
+# Improvement:
+
+* Earlier the game started with the solved condition. Now I have made it to start with a random position.
+* First an input is taken from the terminal which is actually the difficulty of the game. This is ensured by making a shuffle_game function which compel the computer to make 
+  10*x random moves thus creating a random initial board situation.
+* Shuffle_game function exchange a button adjacent to the blank button picked using the rand() function for 10*x times (where x is the difficulty entered in the terminal )
+* Furthermore since exchange of buttons was being used frequently in this improvement, I have made a function for this purpose.
+* Moreover there is a button at the top (which was not in my original code) which tells whether the game is solved or unsolved. To ensure this I have inititalised this button in initgame funtcion
+  and have updated the label in the handle.
+* There is a bool which return true if the game is solved else returns false. This has been used in the handle for updating the label of the game_button.
