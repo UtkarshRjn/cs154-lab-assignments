@@ -1,0 +1,28 @@
+File Name: observation.txt (CS 152/154 Laboratory, 2021 Batch)
+Observation for: function.py
+Author: Utkarsh Ranjan (200050147) 
+
+# For 9 lines implementation
+open: The open() function opens a file, and returns it as a file object.
+dictionaries: Dictionaries are used to store data values in key:value pairs
+                A dictionary is a collection which is ordered*, changeable and does not allow duplicates.
+                Here key are words and its value is the frequency with which it occured in the file.
+for line in file: iterates over lines of files
+split : The split() method splits a string into a list.
+for word in line_list : iterates over elements of line_list
+
+Membership operator: A Membership Operator in Python can be defined as being an operator that is used to validate the membership of a value. 
+                        This operator is used to test memberships in variables such as strings, integers as well as tuples.
+
+In Operator : The in operator in Python is used to check if the value exists in a variable or not. When evaluated, if the operator finds a value then it returns true otherwise false.
+
+Here writing 'if word in dict' checks if the word exists in the dict or not if it exists it increases the value associated with the respective key in the dictionary by 1
+else add the word to our dictionary
+
+second last line iterates over iterables key, value and prints the frequency.
+last line is to close the file.
+
+# For 1 Line implementation
+read: The read() method returns the specified number of bytes from the file
+count: The count() method returns the number of elements with the specified value
+

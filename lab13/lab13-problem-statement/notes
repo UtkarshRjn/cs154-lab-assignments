@@ -1,0 +1,64 @@
+Modus Ponens: inference rule
+
+ All humans are mortal
+ Socrates is a human
+
+ Socrates is mortal 
+
+
+In prolog:
+
+  human ('socrates')
+  mortal(X):-human(X)
+
+
+given query ?mortal(X),
+we find answer X=socrates, deducing that socrates is mortal
+
+
+Resolution in prolog uses modus ponens 
+The algorithm is called SLD resolution (Sterling,Shapiro,Deransart..)
+
+Input: Qeury Q  is the resolvant (conjuntion of goals)
+   Select a goal from Q, 
+	search a clause in database which unifies with this goal
+	  replace the goal with the body of that clause 
+
+	  replace successive goals of Q till all reduce to true, and Q becomes empty 
+		output is instanciation of Q which 
+	but if failure, i.e. no clause in db unifies with goal
+              backtracking is used in case of failure to find another match
+		  if backtracking fails, then there is no solution.
+
+Backtracking
+	uses depth first 
+		select clause by scanning clauses in db from top to bottom
+		select leftmost goal in the resolvant 
+
+        when more than one clause unify with the selected goal, 
+		and if there is a failure, it backtracks and 
+			selects another claclause
+
+
+trace to see it:
+ 
+     trace/0  built in predicate launches debugger
+     notrace/0 stops it
+
+      creep -- proceed through execution ports 
+      skip -- skip a goal giving result without examining subgooals (s)
+      retry -- retry current goal again from exit or redo port (r)
+      fail -- makes current goal to fil (f)
+      abort -- quit debuger
+
+        
+
+				 
+
+
+
+
+
+
+
+

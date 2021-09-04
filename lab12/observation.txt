@@ -1,0 +1,55 @@
+File Name: observation.txt (CS 152/154 Laboratory, 2021 Batch)
+Observation for: problemset 1 and problemset 2 on logic programming
+Author: Utkarsh Ranjan (200050147)
+
+Description : Observation for observation.txt
+
+# reverse.pl
+* I have made a function rev which call findrev function with three agrument of which one is an empty list.
+* The list then get appended by taking the first element out from input list and then adding it at the beginning of the new list being formed.
+
+input : rev([1,2,3,4],RL). 
+output : RL = [4,3,2,1]
+        yes
+
+# palindrome.pl
+* This is same as reverse.pl with one extra line of code palindrome(X):- rev(X,X).
+ 
+input: palindrome([1,2,3,4,5,4,3,2,1]).
+output: yes
+
+input: palindrome([3,2,1]).
+output: no 
+
+# count.pl
+* For this programme I have used if else substitute for prolog
+* condition -> if true(execution); else(execution). 
+
+input: count(1,[1,3,1,4,1,5],M).
+output: M = 3? ;
+        no
+
+# append.pl
+
+input: append([1,2,3],[5,6,3,4],L).
+output: L = [1,2,3,5,6,3,4]
+        yes
+
+# factorial.pl
+
+* Code is a simple reccursive call with intialization 0! = 1
+
+input: fact(5,N). 
+output: 120? ;
+        no
+        
+# min.pl
+
+* In this programme I used the code given by sir for finding minimum in prolog.
+* after that I wrote functions quite similar to reverse.pl using the min in the min_list function.
+
+input: min_list([0,7,1,3,2],Min). 
+output: Min = 1
+        yes
+
+

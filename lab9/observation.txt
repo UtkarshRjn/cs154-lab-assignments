@@ -1,0 +1,90 @@
+File Name: observation.txt (CS 152/154 Laboratory, 2021 Batch)
+Observation for: collection.cpp, complex.cpp, evaloder1.cpp, exceptions.cpp,
+                 lval-rval.cpp , postfixprefix.cpp. right-to-left.cpp, trythis1.cpp, 
+                 trythis2.cpp, why-it-fails.cpp
+Author: Utkarsh Ranjan (200050147) 
+
+# collection.cpp
+* The original code overloaded << operator, I further overloaded >> and + operator.
+* >> operator fetch the last element of the collection while + operator merge another collection into it.
+* >> operator takes in an integer 'elem' as argument and removes last 'elem' elements from the collection. 
+* + operator merges original collection with new collection. The maxsize of the original collection remains the same.
+    If the combined collection has cardinality more than the maxsize of the original collection the extra elements would be
+    discarded.
+* Furhtermore when an object calls an operator function by passing an argument and the returned value of the operator function 
+  calls the next operator function in the same expression, it is called as cascading of operators.
+* This cascading has been incoorporated by returing the reference of collection by the operator so that it can be modified further.
+* Furhtermore there is a collection c4 wherein I have incoorporated cascading of + and >> operators as well.
+
+# complex.cpp
+* I have added two more operators - to calculate the difference of two complex number 
+    and * to compute the product of two complex number.
+* I have also modified main to incoorporate cascading.
+
+# exceptions.cpp
+* In this code an operator [] has been defined in the class collection which returns the ith element of the array
+    of the collection and throws an exception when i > size of the array or i < 0.
+* The exception thrown is of class OutofBound which has a function msg to print the type of exception according decided at the time of
+    throwing the exception in the definition of operator [].
+* The thrown exception is caught in main and the message is printed accordingly.
+
+# right-to-left.cpp
+* The associativity of the = operator is from right-to-left.
+* I have changed the value of b to 8 and a to 90 the remarkable fact is that their final value is dependent only on the value of c.
+* so the expression a = (++b) = (c++) would be evaluted first as a = ((++b) = (c++))
+  (++b) = (c++) assigns 3 as the value of b and ++ increment the value stored by c by 1 and makes it 4.
+* then (a = ++b) assigns the value of a to be same as that of b which is 3.
+* This right to left assignment of the values has been clearly depicted by the instance a1,a2,a3 of the class A in the line 18. a1 = a2 = a3.
+
+// change
+* I have added the same assignments in right to left fashion but in two separate line. The output for a and b are 1 more than the previous one, the reason here
+is because ++b is executed twice instead of once as it was earlier.
+* I have further added an interesting example with -- operator and have commented the output.
+
+# trythis1.cpp
+* precedencce of postfix ++ is higher than the precedencce of prefix ++
+* moreover (,) comma operator has the least precedencce among all operators.
+* so in f(i, i++) i++ is first executed which passes 10 as the argument y and increases i by 1 to make it 11.
+* After this i is executed which simply passed the value of i (which is now 11) as the argument z.
+* Because of the precedencce told in point 1 in f(++i,i++) first i++ is executed and 11 is passed into y.
+  This makes value of i equal to 12 which further increses to 13 when ++i is executed and then 13 is passed for x.
+
+# trythis2.cpp
+* Because the precedencce of postfix ++ is higher than the precedence of prefix ++
+* Moreover the associativity of postfix ++ is left-to-right while associativity of prefix ++ is right-to-left
+* First evalute all the i++ left to right, replace i++ by the value of i and then increment i, then evalute ++i, increment i and replace the occurence of ++i by i
+* Now all ++ are evaluated, now comma operator is executed which has the least precedence which replaces the i's seperated by gamma with their value.
+* In f(i, i++, ++i) first i++ is executed then ++i and then i in their respective precedence order. This gives the desired output 12 11 12
+* In f(++i, i++, ++i) first i++ is executed due to its higher precedence then ++i is executed in their associativity right-to-left. This gives the desired output 15 13 15
+
+//Change 
+* I have added a new case and have written it's output in the comment based on the logic described above.
+
+# postfixprefix.cpp
+* Same ++ operrator can be used in two ways prefix(++a) and postfix(a++).
+* In order to distinguish them, the creators of C++ decided the post-increment version would take an "int" parameter. 
+  It isn't used, but it needs to be there, otherwise it is a pre-increment operator.
+
+# evaloder1.cpp
+* Here p is a global variable and initially equal to 1.
+* Further f(p) returns p after incrementing p by p that is doubling the value of p everytime f(p) is executed.
+* So initially 2 , 4 , 8 are printed.
+* In the last part i.e, f(++p) the incremented value of p i.e, 9 is passed which further doubles to give 18 as the output. 
+
+//Change 
+* I have added an interesting example : cout << f(p++) << " " << f(++p) << " " << f(p) << " " << endl;
+* Here f(p++) passes p =1 as the value of i while incrementing the global variable by 1 making it 2. Thus p = p + i, finally makes p = 3. the other two
+ print statements are similar to sir's original case
+
+# lval-rval.cpp
+* x++ is an r-value so it can’t have a value assigned to it which means r-value can appear on the right but 
+  not on the left hand side of an assignment operator(=).
+* On the other hand ++x is an l-value which may appear as either left hand 
+  or right hand side of an assignment operator(=)
+* Thus ++x = x++; is acceptable but not x++ = x++;
+
+# why-it-fails.cpp
+* the precedencce of << operator is higher than the percedence of || operator thus our compiler execute it as
+    (cout << a) || (b << endl);
+* Here b << endl gives an error invalid operands of types ‘bool’ and ‘<unresolved overloaded function type>’ to binary ‘operator<<’
+* The error would get resolved if we would place a bracket like cout << (a||b) << endl;

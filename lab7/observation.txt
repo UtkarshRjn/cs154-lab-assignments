@@ -1,0 +1,22 @@
+// Program written by: Utkarsh Ranjan (200050147)
+// Program part of: CS 152/CS154 Laboratory, 2021 batch
+// Program for: problem 7 (assignment 7, part 1, program 2) = 15puzzle_structured.cpp 
+
+The bad code choosen for this lab is from lab4 (15puzzle.cpp)
+I have made significant changes to the code which I submitted for lab5 and I have made it structured.
+
+Changes:
+1. In my original code the main function had the implementation for the initiation of various buttons and their labels. In the structured code I have made a function initgame which contains line 79 to 90 of the original code.
+   This made the main look much more organized and easier to read.
+2. Further more the implementation of the shuffling of the buttons randomly by the computer was also initially present in the main. So I made a function shufflegame(int) which takes the integer value given by the user as an argument and shuffle the gameboard accordingly.
+3. This implementation was in a for loop which was initially unstructured with multiple entries and exits. I replaced it with a switch statement which was a single entry single exit block.It had a top down decomposition.
+4. In my original code 'number'(a variable of class MyButton) was public. I instead made it private to hide it's internal implementation and to hide it from all other classes. I instead made a member 
+    function get_number of the class MyButton which retured the variable 'number' and thus this private variable was implementated on global function exchange_number.
+5. While changing the label or initializing the label of buttons a specific code to convert int to char* was repeatedly used so I made an exclusive function int2charstar for the purpose.
+6. Furthermore the handle function earlier contained multiple entry exit blocks with the use of goto. I replaced it with if else statement to make it single entry exit block.
+7. Line 36 of the spaghetti code had a long condition in the if statement. To made it easy to read I made a bool function adjacent_buttons which returned true if the button pressed was adjacent to the blank button else returned false.
+8. Function solved also had multiple returns from it so to make it structured I made a bool and used it to give the code a single entry exit form. A similar change is done in adjacent_buttons function.
+9. Earlier the arguments which I passed through the new Mybutton were numbers instead of variable which made the gameboard disproportionate on changing windows size. Now I passed every argument in terms of three static variable Windows_x, Windows_y and button_edge.
+    This made the board to remain intact even on changing the windows size or button size.
+10. Also I have made a header file which contains the declarartion of class MyButton and all the static variables used in the program. This made program easy to manage and debug and gave it a Top Down finish.
+   

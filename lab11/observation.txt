@@ -1,0 +1,119 @@
+File Name: observation.txt (CS 152/154 Laboratory, 2021 Batch)
+Observation for: problem 4.1.1 (15puzzle.cpp)
+Author: Utkarsh Ranjan (200050147)
+
+// In each of the programm a.py to d.py I have taken ackerman(2,2) as the default input.
+// This example clearly distinguish the output of the four programm
+
+a.py:
+Description: Ackerman function(definition)
+
+output:
+ackerman(2,2) : 7
+
+* In this programm I have simply made a function ackerman with two arguments m,n
+* The recursive function has been implemented in the way it was defined in the problem statement
+
+b.py:
+Description: function with a count of total number of times the function was called
+
+output:
+ackerman(2,2) : 7
+Total number of calls : 27
+
+* In this programm additionally a global variable count has been defined which gets updated
+  everytime the function is called.
+* Finally total count is printed
+
+c.py:
+Description: counts of total number of calls for each recursive instance of ackerman
+            is printed in this programm
+
+output: (WITHOUT MEMORIZATION)
+ackerman(2,2) : 7
+Total Calls :  27
+(2, 2): 1
+(2, 1): 1
+(2, 0): 1
+(1, 1): 3
+(1, 0): 3
+(0, 1): 3
+(0, 2): 3
+(1, 3): 2
+(1, 2): 2
+(0, 3): 2
+(0, 4): 2
+(1, 5): 1
+(1, 4): 1
+(0, 5): 1
+(0, 6): 1
+
+* I have made a class table which has two class variable and no instance variable.
+These are dict_ack and count. One stores the total count of the number of times the
+function was called which other is a dictionary containing the frequency of each call of respective
+ackerman function.
+
+* The class table has two methods append and display, the method append adds an ackerman tuple(m,n) to the table 
+if it's not in the table else it increases their count.
+
+* The display method prints the values stored in the table.
+
+d.py:
+Description: Memorization has been implemented in this programm
+
+output: (WITH MEMORIZATION)
+ackerman(2,2) : 7
+Total Calls :  15
+(2, 2): 1
+(2, 1): 1
+(2, 0): 1
+(1, 1): 1
+(1, 0): 1
+(0, 1): 1
+(0, 2): 1
+(1, 3): 1
+(1, 2): 1
+(0, 3): 1
+(0, 4): 1
+(1, 5): 1
+(1, 4): 1
+(0, 5): 1
+(0, 6): 1
+
+* In this programm the class Table has one more method 'store' and one more class variable dict_value
+ which stores the value of each ackerman funtcion ever called.
+
+* So in the function ackerman before return statement first the values are being stored this way when return statement is executed 
+it first checks whether this ackerman function was already in the table or not,if it was already in the table the value is obtained from there 
+without executing the rest of the function, this was each ackerman function is getting called once.
+
+* executing the code directly shows the result
+
+e.py:
+Description: Fibonnaci recursion
+
+output: (WITHOUT MEMORIZATION)
+21
+Total Calls :  41
+fibonnaci(8): 1
+fibonnaci(7): 1
+fibonnaci(6): 2
+fibonnaci(5): 3
+fibonnaci(4): 5
+fibonnaci(3): 8
+fibonnaci(2): 13
+fibonnaci(1): 8
+
+output; (WITH MEMORIZATION)
+21
+Total Calls :  8
+fibonnaci(8): 1
+fibonnaci(7): 1
+fibonnaci(6): 1
+fibonnaci(5): 1
+fibonnaci(4): 1
+fibonnaci(3): 1
+fibonnaci(2): 1
+fibonnaci(1): 1
+
+* This programm is same as the previous problem, it's just that the recusive relation is that of the Fibonnaci sequence instead of ackerman sequence.

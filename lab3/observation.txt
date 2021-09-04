@@ -1,0 +1,41 @@
+Observations for Lab3
+Author : Utkarsh Ranjan(200050147)
+Program part of:CS 152/154 2021 batch
+
+Main Obsevation : A data structure Stack was implemented in the program through various paradigm and each design made program  progressively object oriented.
+
+1. Observations for model_1.cpp (stack with global variable):
+	* In this model our program did not involved any struct or class, instead stack was used as a  global variable.
+	* Furthermore functions were defined and declared which contained the logic and controls of the program.
+	* Unlike local variable which is created when the function starts execution and is lost when the function terminates, 
+	  stack used as global variable was created as execution started and was lost when the program ended.
+	* Parameter passing was not required in this case. Data sharing was possible as multiple function can access the global variable.
+
+2. Observations for model_2.cpp (stack passed through functions)/(parameter passing):
+	* As far as a single global variable was present in model_1.cpp,the code was clean but as another similar global variable was introduced there came the need to pass every variable associated with the stack 		through each function, which was a cumbersome tast and made code disorganized.
+	* This code motivated us to introduce a new variable type where all associated variables could be grouped together so that we don't need to pass them through every function.
+
+3. Observations for model_3.cpp (stack with struct):
+	* On looking closely through the abstractions involved in this programm we can observe that this is very similar to model_2.cpp with the only basic difference that we are passing a structure Stack as pointer to 		each function(instead of passing each and every variable) and then using -> operator to operate on the varibles assciated with struct.
+
+4. Observations for model_4.cpp (stack with classes):
+	* This was the Object Oriented programming approach in which while calling a control say push or pop we didn't care about what's going inside it. We were not giving any argument other than data while 	  
+         calling for various controls of the object stack.
+	* Observe that in model_1.cpp also we called functions in main in a way similar to this model but the difference was that model_1.cpp failed to keep the encapsulation as the number of object became 2.
+	* All the components that make up the object were within the object itself.
+	* Now since each module within this paradigm is self-sustainable, objects can be taken from one program and used to resolve another problem at hand with little or no alterations.
+
+
+Main Observation: Each of these two classes were an object in themselves. They took input and gave output just like a real telephone/vending machine does.
+
+## DESIGN THINKING FOR TELEPHONE.CPP:
+	input : input from command line (phone number taken in as a string);
+	output : How the phone call concluded.
+	Execution : In function dialdigit a random state of telephone is called which randomly concludes whether call would  
+	time out/invalid no / received. Accordingly other member functions has been called in this function.
+
+## DESIGN THINKING FOR VENDING MACHINE:
+	input : value of coin through command line
+	Output : Prints the drinkid of the drink at respective price.
+	Execution : insertcoin function checks if the inserted value of coin corresponds to some drink and accordingly calls 
+				selectdrink member function which prints the statement for the two cases. returns true when drink is present else return false 

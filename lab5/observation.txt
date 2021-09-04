@@ -1,0 +1,204 @@
+File Name: observation.txt (CS 152/154 Laboratory, 2021 Batch)
+Observation for: lab 5 (prog1.cpp to prog2.cpp)
+Author: Utkarsh Ranjan (200050147)
+
+## Prog1.cpp
+
+Output: 
+ * (On Compilation) error: cannot declare variable ‘a’ to be of abstract type ‘A’
+
+Explanation:
+ * Since the implementation of the function f() is not in the base class A, it is a pure virtual function.
+ * Further a class is abstract if it has atleast one pure virtual function.
+ * Thus here class A is an abstract class and since we cannot create an instance of an abstract class we are getting an error for declaring variable 
+    'a' to be of abstract type 'A'
+
+ * But in the derived class the implementation of the pure virtual function f() is present so it's not an abstract class.
+ * Thus we don't get any error for declaring variable 'b' of type 'B'
+
+ * Furthermore we can have pointers and references of abstract class type so defining 'ap' of type A* and 'bp' of type B* don't give an error
+
+ ## Prog2.cpp
+
+ Output:
+ * Segmentation fault (core dumped)
+
+ Explanation:
+ * Whenever we declare a pointer('ap' here) to a class('A' here), we need to create an instance of the class for the pointer using new.
+ * So we won't get segmentation fault after instantiating the object of our class.
+
+ ap = new B(); // This line would make the code work
+
+ ## Prog3.cpp
+
+ Output:
+ B::f
+ B:g
+ B::f
+ B:g
+
+ Explanation:
+ * So this program solves all issues of program 2
+ * ap and bp stores address of a B instance
+ * Thus ap->f() and ap->g() calls f() and g() of class B respectively.
+ * b is an instance of object B. Thus functions f() and g() are called using the . operator (dot operator)
+
+ ## Prog 4.cpp
+
+ Output:
+A::f
+A::g
+A::f
+A::g
+B::f
+B:g
+
+Explanation:
+* Here A is not an abstract class, so the new expression of class type 'A' is valid
+* Thus ap->f() and ap->g() will call A::f() and A::g() respectively.
+* a and b being instances of object A and B respectively calls f() and g() of class A and B respectively. Thus the Output follows.
+
+## Prog 5.cpp
+
+Output:
+A::f
+A::g
+A::f
+A::g
+B::f
+B:g
+-----------------
+B::f
+B:g
+A::f
+A::g
+B::f
+B:g
+
+Explanation:
+* First part is same as prog4
+* For the second part, after, ap = bp, ap now stores address of a B instance.
+  Thus ap->f() and ap->g() will call B::f() and B::g() respectively.
+* Furthermore a=b(Now this is simply an assignment operator, The data of B is copied into A, but a still is an A object)
+* Hence a.f() and a.g() will call A::f() and A::g() while ap->f() and ap->g() will call B::f() and B::g().
+* These won't be any change in call of b.f() and b.g()
+
+## Prog 6.cpp
+
+Output:
+A::f
+A::g
+B::f
+B::g
+C::f
+A::g
+B::f
+B::g
+C::f
+A::g
+
+Explanation:
+* A is the superclass while B and C are its subclass.
+* ap stores the address of the superclass A and calls the respective functions of the superclass.
+  since 'class A' has no member named 'k' ap->k() is not permitted
+* while bp and cp stores the address of respective subclass and calls the respective functions of the subclass.
+
+* Since B and C are subclass of class A. The assignment ap = bp and ap = cp are valid by inheritance rule.
+* Further since f and g are virtual functions in class A. Dynamic binding occurs on calling ap->f() after ap = bp or ap->f() after ap = cp and leads to callig the function in the derived class (Subclass)
+* Furthermore even after ap = cp (ap is still a pointer of type A*), ap->k() is invalid because these is no member named 'k' in class A, so there is no case of function k in the derived class C overriding the function in the superclass A.
+  function k() in C is independent of A and has nothing to do with a.
+
+## Prog 7.cpp
+
+Output:
+A::f  // Due to call ap->f()
+A::g  // Again due to call ap->f() ( function f() in A contains another call to g() )
+A::g  // Due to call ap->g()
+C::f  // Due to call cp->f()
+A::g  // Due to call cp->g() (since there is no member g in class c this call corresponds to the call in its super class A)
+C::k  // Due to call cp->k()
+C::f  // Due to call cp->k() ( function k() in C contains another call to f() )
+C::f  // Due to call ap->f()
+A::g  // Due to call ap->g() (since there is no member g in class c this call corresponds to the call in its super class A)
+Segmentation fault (core dumped) // Explained below
+
+Explanation:
+* detele destroys value or memory block pointed by pointer. The pointer to object is not destroyed.
+* delete ap destroys the address of the instance of class A to which the pointer was initially initialized to
+* further ap = cp assign the pointer ap to the instance of class C. Thus calling any function with this pointer calls function in C.
+* ap = bp assign ap to a pointer which doesn't point to instance of any class. Instance of bp has not been created thus we get segmentation fault
+
+## Prog 8.cpp
+
+Output:
+C::f
+B::g
+
+Explanation:
+* Here inheritance is different from prog 6 and prog 7. Here C is derived from B which is further derived from A.
+* Thus both the assignment bp = cp and ap = bp is valid as per inheritance rule.
+* Moreover finally the pointer 'ap' of Type 'A' points to an instance of class C.
+* Thus call ap->f() calls C::f() but since there is no member named 'g' in 'class C' ap->g() calls B::g() which is a parent class of C and also contains the definition of g(), furthemore note that A::g() is not called.
+
+## Prog 9.cpp
+
+Output:
+10C::f // Due to call cp->f()
+20B::g // Due to call cp->g() (since there is no member g in class C this call corresponds to the call in its super class B)
+10C::f // Due to call cp -> k()
+10C::k // Due to call cp -> k()
+10C::f // Due to call cp -> k()
+100B::f // Due to call bp ->f()
+100B::g // Due to call bp ->g()
+10C::f // Due to call bp -> f()
+20B::g // Due to call bp -> g()
+200A::f // Due to call ap ->f() 
+200A::g // Due to call ap ->f()
+200A::g // Due to call ap ->g()
+10C::f // Due to call ap->f()
+20B::g // Due to call ap->g()
+
+Explanation:
+
+
+## Prog 10.cpp
+
+Output:
+100A::f // Due to call a.f()
+100A::g // Due to call a.f()
+100A::g // Due to call a.g()
+200B::f // Due to call b.f()
+200B::g // Due to call b.g()
+210A::f // Due to call a.f()
+210A::g // Due to call a.f()
+210A::g // Due to call a.g()
+
+## my1.cpp
+
+Explanation:
+
+* My first file has both Hierarchical and Multilevel inheritance. It depicts a practical application of inheritance. 
+* At the top of the Hierarchy is the superclass Student. It has further subclasses Undergraduate and Graduate. Each of them have further subclasses. Thus the inheritance resembles a tree.
+* The superclass is an abstract class with the function status() as pure virtual. Further there is a virtual function show() which is inherited to all the sub class.  
+* furthermore there is nothing new in the implementation of these classes in the main. Most of it are already covered from prob 1 to prob 2.
+
+## my2.cpp
+
+* In this file, I have implemented diamond inheritance ( Multiple inheritance + Hierarchical inheritance ). This is a basic code ( similar to other program(1 to 10))
+  but there are some interesting results in the output.
+* Here the parent class A has two subclassses B and C both of which are parent class of another sub class D.
+
+Output:
+210 B::g // Due to call d.B::g()
+220 C::g // Due to call d.C::g()
+200 D::k // Due to call d.k()
+100 C::g // Due to call c.g()
+100 C::k // Due to call ap->k()
+100 C::f // Due to call ap->f()
+800 C::f // Due to call ap->f()
+800 C::k // Due to call ap->k()
+800 C::g // Due to call ap->g()
+120 C::h // Due to call cp->h()
+100 D::f // Due to call cp->f()
+100 D::k // Due to call cp->k()
+120 C::g // Due to call cp->g()

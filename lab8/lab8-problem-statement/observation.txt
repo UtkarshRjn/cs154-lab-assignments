@@ -1,0 +1,33 @@
+File Name: observation.txt (CS 152/154 Laboratory, 2021 Batch)
+Observation for: problem 8.1.1 to problem 8.1.5 (str2int.cpp , collection.cpp, substring.cpp, optional-additional-problem-funny-assert.cpp & mycpp.cpp
+Author: Utkarsh Ranjan (200050147) 
+
+# str2int.cpp
+* In this code I have written the logic for string to int conversion.
+* I first made a vector of int and stored each digit of the string into that array. If the string 
+    doesn't contain numbers then atoi(x) give 0 as an output. To avoid this case an assertion has been added (Part 1)
+* Further more at the beggining of the function an assertion s.length () != 0 has been addded to terminate the case when string is empty.(part 4)
+* Moreover at the end ans!= 0 has been added as a post condition assertion (Part 4)
+* To see how each error is catched by respective function run the code commenting all but one part.
+
+# collection.cpp
+* In this code assert(cap == sz) has been added as a preconditon assertion which terminates program when capacity is not equal to the size of the collection.
+* Furthermore in push_back an assertion to eliminate the case when cardinality is greater than capacity has been added.
+* In pop_back an assertion to eliminate the case when cardinality gets negative has been added.
+* Once again to see how each error is catched by respective function run the code commenting all but one part.
+
+# substring.cpp
+* I have written the function which returns the index at which substring is present in a string else it returns -1
+* My preconditon assertions consists of checking whether both the string are not empty and further checking that
+  the substring is shorter in length than the string. If any of these conditions fails the programm throws segmentation fault(core dumped)
+* Furthermore as a postcondition I have added an assertion to check that the index is postive.
+* Once again to see how each error is catched by respective function run the code commenting all but one part.
+
+# optional-additional-problem-funnyassert.cpp
+* I have written the codeassert function but I am not getting the desired output.
+
+# mycpp.cpp
+
+* This code is a part of lab3 model_4.cpp in which we had to make the stack data structure.
+* So here in the push and pop I have added assertions similar to collection.cpp above.
+* Once again to see how each error is catched by respective function run the code commenting all but one part.
